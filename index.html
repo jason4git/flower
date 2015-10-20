@@ -8,78 +8,56 @@
     <title></title>
     <script src="js/mui.min.js"></script>
     <link href="css/mui.min.css" rel="stylesheet"/>
-    <link href="css/app.css" rel="stylesheet" type="text/css" />
-    <link href="css/iconfont.css" rel="stylesheet" />
-    <script type="text/javascript" charset="utf-8">
-      	mui.init({
-      		swipeBack:true //启用右滑关闭功能
-      	});
-    </script>
 </head>
 <body>
-	<header class="mui-bar mui-bar-nav">
+	<header class="mui-bar mui-bar-nav" style="position: static;">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<a class="mui-icon iconfont icon-scan mui-pull-right"></a>
+		<h1 class="mui-title">首页</h1>
 	</header>
+	
 	<nav class="mui-bar mui-bar-tab">
 		<a class="mui-tab-item mui-active" href="#index">
 				<span class="mui-icon mui-icon-home"></span>
 				<span class="mui-tab-label">首页</span>
 			</a>
+			
+			<a id="setting" class="mui-tab-item" href="#tabbar-with-map">
+				<span class="mui-icon mui-icon-navigate"></span>
+				<span class="mui-tab-label">发现</span>
+			</a>
 			<a class="mui-tab-item" href="#tabbar-with-mine">
 				<span class="mui-icon mui-icon-contact"></span>
 				<span class="mui-tab-label">我的</span>
 			</a>
-			<a class="mui-tab-item" href="#tabbar-with-map">
-				<span class="mui-icon mui-icon-gear"></span>
-				<span class="mui-tab-label">设置</span>
-			</a>
 	</nav>
-	<div class="mui-content">
-		<div id="index" class="mui-control-content mui-active">
-				<div class="title">这是div模式选项卡中的第1个子页面.</div>
-				<div class="title">何谓div模式的选项卡？
-					其实就是通过DIV模拟一个独立页面，通过DIV的显示、隐藏模拟不同页面的切换，典型的SPA模式；</div>
-				<div class="title">
-					这种模式适合简单业务系统，因为每个选项卡内容要写在一个DIV中，
-					若逻辑复杂，会导致当前页面DOM结构繁杂，造成webview响应缓慢，甚至崩溃；
-					因此若系统较复杂，需要下拉刷新等操作，推荐使用webview模式的选项卡；</div>
-			</div>
-	</div>
-	
-	<div id="tabbar-with-map" class="mui-control-content">
-				<div class="title">这是div模式选项卡中的第3个子页面，该页面展示一个常见的设置示例.</div>
-				<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-						新消息通知
-					</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-						隐私
-					</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-						通用
-					</a>
-				</li>
-			</ul>
-			<ul class="mui-table-view" style="margin-top: 25px;">
-				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-						关于mui
-					</a>
-				</li>
-			</ul>
-			<ul class="mui-table-view" style="margin-top: 25px;">
-				<li class="mui-table-view-cell">
-					<a style="text-align: center;color: #FF3B30;">
-						退出登录
-					</a>
-				</li>
-			</ul>
-			</div>
+	<div class="mui-content"></div>
+	<script type="text/javascript" charset="utf-8">
+      	mui.init({
+      		//预加载子页面
+      		preloadPages:[{
+      			"id":"setting",
+      			"url":"/setting.html",
+      			"styles":{
+      				"popGesture": "hide"
+      			}
+      		}]
+      	});
+      	
+      	var setting_view=null;
+      	document.getElementById("setting").addEventListener('tap',function(){
+      		if(!setting_view){
+      			setting_view = plus.webview.getWebviewById('setting');
+      		}
+      		setting_view.show('slide-in-right',200);
+      	});
+      	//首页退出事件
+      	mui.back= function(){
+      		mui.confirm('确认退出应用','提示',['确定','取消'],function(e){
+      			if(e.index === 0){
+      				plus.runtime.quit();
+      			}
+      		});
+      	};
+    </script>
 </body>
 </html>
