@@ -7,22 +7,100 @@
     <script src="js/mui.min.js"></script>
     <link href="css/mui.min.css" rel="stylesheet"/>
     <script type="text/javascript" charset="utf-8">
-      	mui.init();
+      	mui.init({
+      		gestureConfig:{
+      			swipe:true
+      		}
+      	});
     </script>
 </head>
 <body>
+	<style>
+			.mui-control-content {
+				background-color: white;
+				min-height: 150px;
+			}
+			.mui-control-content .mui-loading {
+				margin-top: 50px;
+			}
+		</style>
 	<header class="mui-bar mui-bar-nav">
 		<h1 class="mui-title">我</h1>
 		<a class="mui-action-back mui-btn-link mui-pull-right">设置</a>
 	</header>
+	<!--
+    	作者：xujiacool@163.com
+    	时间：2015-10-21
+    	描述：向上滑动 personal-info DIV隐藏，向下滑动 显示
+    -->
+	<!--<div id="personal-info" class="mui-content">
+		个人头像等布局
+	</div>-->
 	<div class="mui-content">
 		<div id="slider" class="mui-slider">
-			<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-				<a class="mui-control-item" href="#">动态</a>
-				<a class="mui-control-item" href="#">喜欢</a>
+			<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+				<a class="mui-control-item" href="#item_news">动态</a>
+				<a class="mui-control-item" href="#item_like">喜欢</a>
+			</div>
+		
+		<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
+		<div class="mui-slider-group">
+			<div id="item_news" class="mui-slider-item mui-control-content mui-active">
+				<div id="scroll1" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+								第一个选项卡子项-1
+							</li>
+							<li class="mui-table-view-cell">
+								第一个选项卡子项-2
+							</li>
+							<li class="mui-table-view-cell">
+								第一个选项卡子项-3
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="item_like" class="mui-slider-item mui-control-content ">
+				<div id="scroll2" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="mui-loading">
+							<div class="mui-spinner"></div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
+		</div>
 	</div>
-	
+	<script>
+		mui.init({
+			swipeBack:false
+		});
+		(function($){
+			$('.mui-scroll-wrapper').scroll({
+				indicators:true//是否显示滚动条
+			});
+			var html2 = '<ul class="mui-table-view"><li class="mui-table-view-cell">第二个选项卡子项-1</li><li class="mui-table-view-cell">第二个选项卡子项-2</li><li class="mui-table-view-cell">第二个选项卡子项-3</li></ul>';
+			var item2 = document.getElementById('item_like');
+			document.getElementById('slider').addEventListener('slide',function(e){
+				console.log('触发slide事件');
+				console.log('选中第'+e.detail.slideNumber+'个选项卡');
+				if(e.detail.slideNumber ===1){
+					if(item2.querySelector('.mui-loading')){
+						setTimeout(function(){
+							item2.querySelector('.mui-scroll').innerHTML=html2;
+						},500);
+					}
+				}
+			});
+			//var sliderSegmentedControl = document.getElementById('sliderSegmentedControl');
+		})(mui);
+//		mui(".mui-content").on('swipeup',function(){
+//			console.log("向上滑动"); 
+//			document.getElementById('personal-info').classList.add('mui-hidden');
+//		});
+	</script>
 </body>
 </html>

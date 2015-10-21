@@ -35,8 +35,8 @@
       	mui.init({
       		//预加载子页面
       		preloadPages:[{
-      			"id":"setting",
-      			"url":"/setting.html",
+      			"id":"personal",
+      			"url":"/personal.html",
       			"styles":{
       				"popGesture": "hide"
       			}
@@ -46,7 +46,7 @@
       	var setting_view=null;
       	document.getElementById("personal").addEventListener('tap',function(){
       		if(!setting_view){
-      			setting_view = plus.webview.getWebviewById('setting');
+      			setting_view = plus.webview.getWebviewById('personal');
       		}
       		setting_view.show('slide-in-right',200);
       	});
