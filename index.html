@@ -16,7 +16,7 @@
 	</header>
 	
 	<nav class="mui-bar mui-bar-tab">
-		<a class="mui-tab-item mui-active" href="#index">
+		<a id="index_list" class="mui-tab-item mui-active" href="#index">
 				<span class="mui-icon mui-icon-home"></span>
 				<span class="mui-tab-label">首页</span>
 			</a>
@@ -40,6 +40,12 @@
       			"styles":{
       				"popGesture": "hide"
       			}
+      		},{
+      			"id":"index",
+      			"url":"list_index.html",
+      			"styles":{
+      				"popGesture": "close"
+      			}
       		}]
       	});
       	
@@ -49,6 +55,14 @@
       			setting_view = plus.webview.getWebviewById('personal');
       		}
       		setting_view.show('slide-in-right',200);
+      	});
+      	
+      	var index_view = null;
+      	document.getElementById("index_list").addEventListener('tap',function(){
+      		if(!index_view){
+      			index_view = plus.webview.getWebviewById('index');
+      		}
+      		index_view.show('slide-in-right',200);
       	});
       	//首页退出事件
       	mui.back= function(){
