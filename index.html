@@ -34,17 +34,19 @@
 	<script type="text/javascript" charset="utf-8">
       	mui.init({
       		//预加载子页面
-      		preloadPages:[{
-      			"id":"personal",
-      			"url":"/personal.html",
-      			"styles":{
-      				"popGesture": "hide"
-      			}
-      		},{
-      			"id":"index",
-      			"url":"list_index.html",
-      			"styles":{
-      				"popGesture": "close"
+//    		preloadPages:[{
+//    			"id":"personal",
+//    			"url":"/personal.html",
+//    			"styles":{
+//    				"popGesture": "hide"
+//    			}
+//    		}],
+      		subpages:[{
+      			id:'list_index',
+      			url:'list_index.html',
+      			styles:{
+      				top:'40px',
+      				bottom:'51px'
       			}
       		}]
       	});
@@ -57,13 +59,6 @@
       		setting_view.show('slide-in-right',200);
       	});
       	
-      	var index_view = null;
-      	document.getElementById("index_list").addEventListener('tap',function(){
-      		if(!index_view){
-      			index_view = plus.webview.getWebviewById('index');
-      		}
-      		index_view.show('slide-in-right',200);
-      	});
       	//首页退出事件
       	mui.back= function(){
       		mui.confirm('确认退出应用','提示',['确定','取消'],function(e){

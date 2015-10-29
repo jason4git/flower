@@ -6,17 +6,30 @@
     <title></title>
     <script src="js/mui.min.js"></script>
     <link href="css/mui.min.css" rel="stylesheet"/>
-    <script type="text/javascript" charset="utf-8">
-      	mui.init();
-    </script>
+    
+    <style>
+  		
+    </style>
 </head>
 <body>
-	<header class="mui-bar mui-bar-nav">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<h1 class="mui-title">首页列表</h1>
-	</header>
-	<div class="mui-content-padded"></div>
 	<div class="mui-content">
+		<div id="slider" class="mui-slider">
+			<div class="mui-slider-group mui-slider-loop">
+				<div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="images/yuantiao.jpg"/></a></div>
+				<div class="mui-slider-item"><a href="#"><img src="images/cbd.jpg" /></a></div>
+				<div class="mui-slider-item"><a href="#"><img src="images/muwu.jpg" /></a></div>
+			    <div class="mui-slider-item"><a href="#"><img src="images/shuijiao.jpg" /></a></div>
+			    <div class="mui-slider-item"><a href="#"><img src="images/yuantiao.jpg" /></a></div>
+			    <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="images/cbd.jpg"/></a></div>
+			</div>
+			<div class="mui-slider-indicator">
+				<div class="mui-indicator mui-active"></div>
+				<div class="mui-indicator"></div>
+				<div class="mui-indicator"></div>
+				<div class="mui-indicator"></div>
+			</div>
+		</div>
+		
 		<ul class="mui-table-view">
 			<li class="mui-table-view-cell">
 				<a class="mui-navigate-right">
@@ -38,6 +51,12 @@
 			</li>
 		</ul>
 	</div>
-	
+	<script type="text/javascript" charset="utf-8">
+      	mui.init();
+      	var gallery = mui("#slider");
+      	gallery.slider({
+      		interval:4000//自动轮播周期，若为0则不自动播放
+      	});
+    </script>
 </body>
 </html>
